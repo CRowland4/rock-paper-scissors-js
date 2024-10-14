@@ -1,5 +1,6 @@
 playGame();
 
+
 function playGame() {
     let humanScore = 0;
     let computerScore = 0;
@@ -59,7 +60,6 @@ function playGame() {
 }
 
 
-
 function getComputerChoice() {
     let number = Math.floor((Math.random() * 3) + 1);
 
@@ -73,6 +73,7 @@ function getComputerChoice() {
         throw new Error(`Unexpected random number generated: ${number}`);
     }
 }
+
 
 function getHumanChoice() {
     let choice = prompt('Enter "rock", "paper", or "scissors": ');
