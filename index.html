@@ -4,8 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="game.css">
+    <script src="./game.js" defer></script>
 </head>
 <body>
-    <script src="./game.js"></script>
+    <h1>Rock Paper Scissors</h1>
+
+    <div class="game-buttons">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+
+    <div class="results">
+        <h2 id="roundMessage">Make a selection to begin</h2>
+        <p class="computer-score">Computer Score: <span id="computerScore">0</span></p>
+        <p class="human-score">Your Score: <span id="humanScore">0</span></p>
+    </div>
 </body>
 </html>

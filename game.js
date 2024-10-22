@@ -1,62 +1,124 @@
-playGame();
+// TODO remove the individual event listeners in place of a bubbling event
+let humanScore = 0;
+let computerScore = 0;
+
+function main() {
+    addHumanSelectionEventListeners();
+}
 
 
-function playGame() {
-    let humanScore = 0;
-    let computerScore = 0;
+function addHumanSelectionEventListeners() {
+    const rockButton = document.querySelector("#rock");
+    rockButton.addEventListener("click", (event) => {
+        const humanChoice = event.target.id;
+        playRound(humanChoice, getComputerChoice());
+    });
 
-    function playRound(humanChoice, computerChoice) {
-        humanChoice = humanChoice.toLowerCase();
-    
-        const winMessage = `You win - ${humanChoice} beats ${computerChoice}!`;
-        const loseMessage = `You lose - ${humanChoice} loses to ${computerChoice}!`;
-        const tieMessage = "Tie!";
-    
-        if (humanChoice == "rock" && computerChoice == "rock") {
-            console.log(tieMessage);
-        } else if (humanChoice == "paper" && computerChoice == "paper") {
-            console.log(tieMessage);
-        } else if (humanChoice == "scissors" && computerChoice == "scissors") {
-            console.log(tieMessage);
-        } else if (humanChoice == "rock" && computerChoice == "paper") {
-            console.log(loseMessage);
-            computerScore++;
-        } else if (humanChoice == "rock" && computerChoice == "scissors") {
-            console.log(winMessage);
-            humanScore++;
-        } else if (humanChoice == "paper" && computerChoice == "scissors") {
-            console.log(loseMessage);
-            computerScore++;
-        } else if (humanChoice == "paper" && computerChoice == "rock") {
-            console.log(winMessage);
-            humanScore++;
-        } else if (humanChoice == "scissors" && computerChoice == "rock") {
-            console.log(loseMessage);
-            computerScore++;
-        } else if (humanChoice == "scissors" && computerChoice == "paper") {
-            console.log(winMessage);
-            humanScore++;
-        } else {
-            message = `Unexpected choices - Computer: ${computerChoice}, Human: ${humanChoice}`;
-            throw new Error(message);
-        }
-    }
+    const paperButton = document.querySelector("#paper");
+    paperButton.addEventListener("click", (event) {
+        const humanChoice = event.target.id;
+        playRound(humanChoice, getComputerChoice())
+    });
 
-    for (let i = 0; i < 5; i++) {
-        let humanChoice = getHumanChoice();
-        let computerChoice = getComputerChoice();
-        playRound(humanChoice, computerChoice);
-    }
+    const scissorsButton = document.querySelector("#scissors");
+    scissorsButton.addEventListener("click", (event) => {
+        const humanChoice = event.target.id;
+        playRound(humanChoice, getComputerChoice());
+    });
 
-    if (humanScore > computerScore) {
-        console.log(`You won the game ${humanScore} to ${computerScore}!`);
-    } else if (humanScore < computerScore) {
-        console.log(`You lost the game ${humanScore} to ${computerScore}!`);
+    return;
+}
+
+
+function playRound(humanChoice, computerChoice) {
+    const roundWinMessage = `You win - ${humanChoice} beats ${computerChoice}!`;
+    const roundLoseMessage = `You lose - ${humanChoice} loses to ${computerChoice}!`;
+    const roundTieMessage = "Tie!";
+
+    const roundMessageTag = document.querySelector("#roundMessage");
+
+    if (humanChoice == "rock" && computerChoice == "rock") {
+        updateRoundMessage(roundTieMessage);
+    } else if (humanChoice == "paper" && computerChoice == "paper") {
+        updateRoundMessage(roundTieMessage);
+    } else if (humanChoice == "scissors" && computerChoice == "scissors") {
+        updateRoundMessage(roundTieMessage);
+    } else if (humanChoice == "rock" && computerChoice == "paper") {
+        updateRoundMessage(roundLoseMessage);
+        incrementComputerScore();
+    } else if (humanChoice == "rock" && computerChoice == "scissors") {
+        updateRoundMessage(roundWinMessage);
+        incrementHumanScore();
+    } else if (humanChoice == "paper" && computerChoice == "scissors") {
+        updateRoundMessage(roundLoseMessage);
+        incrementComputerScore();
+    } else if (humanChoice == "paper" && computerChoice == "rock") {
+        updateRoundMessage(roundWinMessage);
+        incrementHumanScore();
+    } else if (humanChoice == "scissors" && computerChoice == "rock") {
+        updateRoundMessage(roundLoseMessage);
+        incrementComputerScore();
+    } else if (humanChoice == "scissors" && computerChoice == "paper") {
+        updateRoundMessage(roundWinMessage);
+        incrementHumanScore();
     } else {
-        console.log(`The game was tied ${humanScore} to ${computerScore}!`);
+        message = `Unexpected choices - Computer: ${computerChoice}, Human: ${humanChoice}`;
+        throw new Error(message);
     }
 
-    return
+    const humanScore = Number(document.querySelector("#humanScore").textContent);
+    const computerScore = Number(document.querySelector("#computerScore").textContent);
+
+    if ((humanScore === 5) || (computerScore === 5)) {
+        announceWinner();
+        disableHumanSelectionButtons();
+        addNewGameButton();
+    }
+
+    return;
+}
+
+
+function announceWinner(humanScore, computerScore) {
+    let gameEndMessage = "";
+    if (humanScore > computerScore) {
+        gameEndMessage = 
+    }
+}
+
+
+function disableHumanSelectionButtons() {
+    // TODO
+}
+
+
+function addNewGameButton() {
+    // TODO
+}
+
+
+function incrementHumanScore() {
+    const humanScoreTag = document.querySelector("#humanScore");
+
+    const currentHumanScore = Number(humanScoreTag.textContent);
+    humanScoreTag.textContent = currentHumanScore + 1;
+    return;
+}
+
+
+function incrementComputerScore() {
+    const computerScoreTag = document.querySelector("#computerScore");
+    
+    const currentComputerScore = Number(computerScoreTag.textContent);
+    computerScoreTag.textContent = currentComputerScore + 1;
+    return;
+}
+
+
+function updateRoundMessage(message) {
+    const roundMessageTag = document.querySelector("#roundMessage");
+    updateRoundMessage(message);
+    return;
 }
 
 
@@ -75,7 +137,23 @@ function getComputerChoice() {
 }
 
 
-function getHumanChoice() {
-    let choice = prompt('Enter "rock", "paper", or "scissors": ');
-    return choice;
+
+
+
+
+
+
+// This was the original
+// playGame();
+
+
+function playGame() {
+    let humanChoice = getHumanChoice();
+    let computerChoice = getComputerChoice();
+    playRound(humanChoice, computerChoice);
+
+  
+
+    return
 }
+
