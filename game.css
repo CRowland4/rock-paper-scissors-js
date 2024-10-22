@@ -10,6 +10,7 @@ h1 {
 
 .results {
     margin: 50px 700px 0px 700px;
+    padding-bottom: 25px;
     display: flex;
     flex-direction: column;
     align-items: center;
